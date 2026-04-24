@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Train Details</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #333;
+    }
+    .page-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+    .hero {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      padding: 28px 32px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: 2rem;
+      color: #004085;
+    }
+    .hero p {
+      margin: 0;
+      color: #555;
+      line-height: 1.6;
+    }
+    .train-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+    .train-table thead {
+      background: #004085;
+      color: #fff;
+    }
+    .train-table th,
+    .train-table td {
+      padding: 16px 18px;
+      text-align: left;
+      border-bottom: 1px solid #e8eef4;
+    }
+    .train-table tbody tr:hover {
+      background: #f2f6fb;
+    }
+    .empty-state {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      color: #555;
+    }
+    .empty-state strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <section class="hero">
+      <h1>Train Schedule Overview</h1>
+      <p>Review the latest available trains, their codes, and capacity details. Use this page to track train availability in your fleet.</p>
+    </section>
+
+    {% if trains %}
+      <table class="train-table">
+        <thead>
+          <tr>
+            <th>Train Name</th>
+            <th>Train Code</th>
+            <th>Total Capacity</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for train in trains %}
+            <tr>
+              <td>{{ train.Train_name }}</td>
+              <td>{{ train.train_code }}</td>
+              <td>{{ train.total_capacity }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="empty-state">
+        <strong>No trains available</strong>
+        <p>There are no train records in the system yet. Add train data to see the schedule here.</p>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
